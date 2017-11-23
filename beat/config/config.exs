@@ -40,4 +40,5 @@ config :beat, Beat.Scheduler,
     # {"@daily",         {Backup, :backup, []}}
     # ---------------------------------------
     {"* * * * *",      {Beat.Example, :hello, []}},
+    {"* * * * *",      {Beat.Bridge, :sum_two_integers_in_ruby, [1, 2]}},
   ]
