@@ -1,12 +1,12 @@
 defmodule Beat.Bridge do
   @ruby_echo Path.expand("../bin/exec", '.')
 
-  @command "ruby #{@ruby_echo}"
+  @command "#{@ruby_echo}"
 
-  def sum_two_integers_in_ruby(one, another) do
+  def execute(command) do
     pid = Port.open({:spawn, @command}, [{:packet, 4}, :nouse_stdio, :exit_status, :binary])
 
-    encoded_msg = {:sum_two_integers, one, another} |> encode_data
+    encoded_msg = {:execute, command} |> encode_data
 
     pid |> Port.command(encoded_msg)
 
