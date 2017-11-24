@@ -31,7 +31,8 @@ defmodule Beat.Mixfile do
   defp deps do
     [
       {:quantum, ">= 2.2.0"},
-      {:timex, "~> 3.0"}
+      {:timex, "~> 3.0"},
+      {:distillery, "~> 1.5", runtime: false}
     ]
   end
 end
