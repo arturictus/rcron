@@ -3,8 +3,8 @@ defmodule Beat.Bridge do
 
   @script "#{@ruby_echo}"
 
-  def execute(_command) do
-    command = Beat.tasks |> Poison.encode
+  def execute(data) do
+    command = data |> Poison.encode!
     pid = Port.open({:spawn, @script}, [{:packet, 4}, :nouse_stdio, :exit_status, :binary])
 
     encoded_msg = {:execute, command} |> encode_data
@@ -14,7 +14,7 @@ defmodule Beat.Bridge do
     receive do
       {_, {:data, data}} ->
       case data |> decode_data do
-        {:result, result} -> result
+        {:result, result} -> IO.puts(inspect(result))
         _ -> {:error, "Unknown message"}
       end
     end

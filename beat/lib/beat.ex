@@ -11,13 +11,13 @@ defmodule Beat do
     File.read!(tasks_file)
   end
 
-  def tasks do
+  def config do
     tasks_file_content
     |> YamlElixir.read_from_string
   end
 
-  def add_tasks do
-    tasks["tasks"]
+  def tasks do
+    config["tasks"]
   end
 
 

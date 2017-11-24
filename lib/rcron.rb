@@ -1,7 +1,8 @@
 require "rcron/version"
+require 'json'
 module Rcron
-  def self.call(command)
-    puts command
-    'ok'
+  def self.call(data)
+    hash = JSON.parse(data)
+    JSON.generate(hash)
   end
 end

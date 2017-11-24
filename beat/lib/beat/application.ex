@@ -3,6 +3,8 @@ defmodule Beat.Application do
   # for more information on OTP Applications
   @moduledoc false
 
+  alias Beat.Job
+
   use Application
 
   def start(_type, _args) do
@@ -18,6 +20,16 @@ defmodule Beat.Application do
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Beat.Supervisor]
-    Supervisor.start_link(children, opts)
+    out = Supervisor.start_link(children, opts)
+    add_jobs
+    out
+  end
+
+  def add_jobs do
+    IO.puts(inspect(Beat.tasks))
+    Beat.tasks
+    |> Enum.each(fn (data)->
+      Job.build(data) |> Job.add
+    end)
   end
 end

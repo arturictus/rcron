@@ -1,15 +1,16 @@
 defmodule Beat.Job do
   import Crontab.CronExpression
   alias Crontab.CronExpression.Parser
+  alias Beat.Bridge
 
-  def build_job(%{} = data) do
+  def build(%{} = data) do
     Beat.Scheduler.new_job()
     |> set_name(data)
     |> set_schedule(data)
     |> set_task(data)
   end
 
-  def add_job(job) do
+  def add(job) do
     job
     |> Beat.Scheduler.add_job()
   end
