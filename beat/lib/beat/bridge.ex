@@ -4,7 +4,7 @@ defmodule Beat.Bridge do
   @script "#{@ruby_echo}"
 
   def execute(_command) do
-    command = Beat.tasks
+    command = Beat.tasks |> Poison.encode
     pid = Port.open({:spawn, @script}, [{:packet, 4}, :nouse_stdio, :exit_status, :binary])
 
     encoded_msg = {:execute, command} |> encode_data
