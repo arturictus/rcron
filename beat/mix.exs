@@ -4,7 +4,7 @@ defmodule Beat.Mixfile do
   def project do
     [app: :beat,
      version: "0.1.0",
-     elixir: "~> 1.4",
+     elixir: "~> 1.5",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps()]
@@ -32,6 +32,8 @@ defmodule Beat.Mixfile do
     [
       {:quantum, ">= 2.2.0"},
       {:timex, "~> 3.0"},
+      {:yaml_elixir, "~> 1.3.1"},
+      {:poison, "~> 3.1"},
       {:distillery, "~> 1.5", runtime: false}
     ]
   end

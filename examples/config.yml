@@ -1,0 +1,12 @@
+path: '/'
+env: development
+tasks:
+  - schedule: "* * * * *"
+    command: Hello.mum
+    args:
+      - 123
+  - schedule: "* * * * *"
+    type: rake
+    command: mongoid:create_indexes
+    args:
+      - 123

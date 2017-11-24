@@ -3,16 +3,11 @@ defmodule Beat do
   Documentation for Beat.
   """
 
-  @doc """
-  Hello world.
+  def tasks_file do
+    System.get_env("RCRON_CONFIG") || Path.expand("~/rcron_config.yml")
+  end
 
-  ## Examples
-
-      iex> Beat.hello
-      :world
-
-  """
-  def hello do
-    :world
+  def tasks do
+    File.read!(tasks_file)
   end
 end

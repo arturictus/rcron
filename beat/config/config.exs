@@ -39,5 +39,5 @@ config :beat, Beat.Scheduler,
     # Runs every midnight:
     # {"@daily",         {Backup, :backup, []}}
     # ---------------------------------------
-    {"* * * * *", {Beat.Bridge, :execute, ["Rcron.call"]}},
+    {"* * * * *", {Beat.Bridge, :execute, ['Hello']}},
   ]

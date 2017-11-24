@@ -1,10 +1,11 @@
 defmodule Beat.Bridge do
   @ruby_echo Path.expand("../bin/exec", '.')
 
-  @command "#{@ruby_echo}"
+  @script "#{@ruby_echo}"
 
-  def execute(command) do
-    pid = Port.open({:spawn, @command}, [{:packet, 4}, :nouse_stdio, :exit_status, :binary])
+  def execute(_command) do
+    command = Beat.tasks
+    pid = Port.open({:spawn, @script}, [{:packet, 4}, :nouse_stdio, :exit_status, :binary])
 
     encoded_msg = {:execute, command} |> encode_data
 
@@ -13,7 +14,7 @@ defmodule Beat.Bridge do
     receive do
       {_, {:data, data}} ->
       case data |> decode_data do
-        {:result, result} -> IO.puts(inspect(result))
+        {:result, result} -> result
         _ -> {:error, "Unknown message"}
       end
     end
