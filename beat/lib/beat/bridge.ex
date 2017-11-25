@@ -1,5 +1,6 @@
 defmodule Beat.Bridge do
-  @ruby_echo Path.expand("../bin/exec", '.')
+  # @ruby_echo Path.expand("../bin/exec", '.')
+  @ruby_echo "/Users/arturpanach/code/rcron_app_example/bin/rcron_callback"
 
   @script "#{@ruby_echo}"
 
@@ -14,7 +15,9 @@ defmodule Beat.Bridge do
     receive do
       {_, {:data, data}} ->
       case data |> decode_data do
-        {:result, result} -> IO.puts(inspect(result))
+        {:result, result} ->
+          IO.puts("ruby responded:")
+          IO.puts(inspect(result))
         _ -> {:error, "Unknown message"}
       end
     end
