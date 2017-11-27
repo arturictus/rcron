@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+cd beat &&  mix release.clean --implode && MIX_ENV=prod mix release --env=prod
+cd ..
+rm -rf bin/macos
+mkdir -p bin/macos
+cp -a beat/_build/prod/rel/beat bin/macos

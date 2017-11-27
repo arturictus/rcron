@@ -1,0 +1,11 @@
+{application,beat,
+             [{applications,[kernel,stdlib,elixir,logger,yaml_elixir,poison,
+                             timex,quantum]},
+              {description,"beat"},
+              {modules,['Elixir.Beat','Elixir.Beat.Application',
+                        'Elixir.Beat.Bridge','Elixir.Beat.Job',
+                        'Elixir.Beat.Scheduler']},
+              {registered,[]},
+              {vsn,"0.1.0"},
+              {extra_applications,[logger,yaml_elixir]},
+              {mod,{'Elixir.Beat.Application',[]}}]}.
