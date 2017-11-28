@@ -34,6 +34,7 @@ defmodule Beat.Mixfile do
       {:timex, "~> 3.0"},
       {:yaml_elixir, "~> 1.3.1"},
       {:poison, "~> 3.1"},
+      {:poolboy, "~> 1.5"},
       {:distillery, "~> 1.5", runtime: false}
     ]
   end

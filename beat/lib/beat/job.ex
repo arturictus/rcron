@@ -34,7 +34,7 @@ defmodule Beat.Job do
     job
     |> Quantum.Job.set_task(fn ->
       data
-      |> Bridge.execute
+      |> Bridge.execute("poolboy")
     end)
   end
 

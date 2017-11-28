@@ -14,7 +14,8 @@ defmodule Beat.Application do
     children = [
       # Starts a worker by calling: Beat.Worker.start_link(arg1, arg2, arg3)
       # worker(Beat.Worker, [arg1, arg2, arg3]),
-      worker(Beat.Scheduler, [])
+      worker(Beat.Scheduler, []),
+      :poolboy.child_spec(:worker, poolboy_config())
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
@@ -23,6 +24,15 @@ defmodule Beat.Application do
     out = Supervisor.start_link(children, opts)
     add_jobs
     out
+  end
+
+  defp poolboy_config do
+    [
+      {:name, {:local, :worker}},
+      {:worker_module, Beat.Ruby},
+      {:size, 5},
+      {:max_overflow, 2}
+    ]
   end
 
   def add_jobs do
