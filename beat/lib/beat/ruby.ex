@@ -13,9 +13,17 @@ defmodule Beat.Ruby do
   def handle_call({:send, message}, from, ruby) do
     IO.puts("handleling call self")
     IO.puts("handleling call #{inspect(ruby)}")
-    out = send_message(ruby, message)
-    send(from, out)
-    {:reply, out, ruby}
+    send_message(ruby, message)
+    receive do
+      {_, {:data, data}} ->
+      case data |> decode_data do
+        {:result, result} ->
+          IO.puts("ruby responded:")
+          IO.puts(inspect(result))
+        _ -> {:error, "Unknown message"}
+      end
+    end
+    {:reply, nil, ruby}
   end
 
   def init_instance(script) do
